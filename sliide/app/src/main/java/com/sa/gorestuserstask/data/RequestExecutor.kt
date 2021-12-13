@@ -2,7 +2,7 @@ package com.sa.gorestuserstask.data
 
 import com.sa.gorestuserstask.data.remote.error.ApiErrorMapper
 import com.sa.gorestuserstask.data.remote.error.ApiException
-import com.sa.gorestuserstask.data.remote.error.Error
+import com.sa.gorestuserstask.domain.entity.Error
 import com.sa.gorestuserstask.domain.usecase.Output
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

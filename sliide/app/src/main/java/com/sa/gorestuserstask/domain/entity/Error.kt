@@ -1,13 +1,13 @@
-package com.sa.gorestuserstask.data.remote.error
+package com.sa.gorestuserstask.domain.entity
 
-sealed class Error {
+sealed interface Error {
 
-    object GeneralError: Error()
+    object GeneralError : Error
 
     data class ApiError(
         val code: Int,
         val errors: List<ErrorDetails> = listOf()
-    ) : Error()
+    ) : Error
 
     data class ErrorDetails(
         val field: String = "",
@@ -16,5 +16,5 @@ sealed class Error {
 
     data class OtherError(
         val cause: Throwable
-    ) : Error()
+    ) : Error
 }

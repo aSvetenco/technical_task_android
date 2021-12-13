@@ -5,4 +5,7 @@
     <string name="user_gender_female">Female</string>
     <string name="user_status_active">Active</string>
     <string name="user_status_inactive">Inactive</string>
+    <string name="generic_error_message">Something went wrong...</string>
+    <string name="user_successfully_deleted">User was successfully deleted</string>
+    <string name="delete_user_message">Are you sure you want to remove user - %s</string>
 </resources>

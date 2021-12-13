@@ -1,9 +1,8 @@
 package com.sa.gorestuserstask.di
 
 import android.app.Application
-import com.sa.gorestuserstask.di.module.AppModule
-import com.sa.gorestuserstask.di.module.NetworkModule
-import com.sa.gorestuserstask.ui.users.UserListFragment
+import com.sa.gorestuserstask.di.module.*
+import com.sa.gorestuserstask.presentation.ui.users.di.UserListDependencies
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -12,7 +11,9 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AppModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        RepositoryModule::class,
+        DependenciesModule::class
     ]
 )
 interface AppComponent {
@@ -24,5 +25,19 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(fragment: UserListFragment)
+    fun provideUserListDependencies(): UserListDependencies
+
+    companion object {
+        @Volatile
+        private var instance: AppComponent? = null
+
+        fun get(): AppComponent = requireNotNull(
+            instance
+        ) { "AppComponent is not initialized yet. Call init first." }
+
+        fun init(component: AppComponent) {
+            require(instance == null) { "${AppComponent::class.simpleName} is already initialized." }
+            instance = component
+        }
+    }
 }

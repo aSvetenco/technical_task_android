@@ -1,9 +1,9 @@
-package com.sa.gorestuserstask.ui
+package com.sa.gorestuserstask.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.sa.gorestuserstask.R
-import com.sa.gorestuserstask.ui.users.UserListFragment
+import com.sa.gorestuserstask.presentation.ui.users.UserListFragment
 
 class MainActivity : AppCompatActivity() {
 

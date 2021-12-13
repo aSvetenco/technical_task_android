@@ -1,6 +1,6 @@
 package com.sa.gorestuserstask.domain.usecase
 
-import com.sa.gorestuserstask.data.remote.error.Error
+import com.sa.gorestuserstask.domain.entity.Error
 
 sealed interface Output<T> {
     class Success<T>(val data: T) : Output<T>

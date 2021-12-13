@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //android lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'

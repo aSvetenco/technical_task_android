@@ -14,8 +14,6 @@ class AddUserApiResponse(
     val data: UserApiModel = UserApiModel()
 ) : ApiResponse()
 
-class EmptyResponse : ApiResponse()
-
 data class Meta(
     val pagination: Pagination = Pagination()
 )
@@ -40,10 +38,5 @@ data class UserApiRequest(
     val email: String,
     val gender: String,
     val status: String
-)
-
-data class ApiError(
-    val field: String?,
-    val message: String = ""
 )
 
