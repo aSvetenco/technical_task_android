@@ -1,4 +1,4 @@
-package com.sa.gorestuserstask.di.module
+package com.sa.gorestuserstask.app.di.module
 
 import android.app.Application
 import android.content.res.Resources

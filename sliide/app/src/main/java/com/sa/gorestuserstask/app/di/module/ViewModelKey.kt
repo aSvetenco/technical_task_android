@@ -1,4 +1,4 @@
-package com.sa.gorestuserstask.di.module
+package com.sa.gorestuserstask.app.di.module
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

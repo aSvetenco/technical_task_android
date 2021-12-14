@@ -1,4 +1,4 @@
-package com.sa.gorestuserstask.domain.usecase
+package com.sa.gorestuserstask.domain
 
 import com.sa.gorestuserstask.domain.entity.Error
 

@@ -5,6 +5,8 @@ import com.sa.gorestuserstask.data.remote.UserApiRequest
 import com.sa.gorestuserstask.domain.entity.Gender
 import com.sa.gorestuserstask.domain.entity.Status
 import com.sa.gorestuserstask.domain.entity.User
+import java.text.SimpleDateFormat
+import java.util.*
 
 class UserMapper {
 
@@ -19,7 +21,11 @@ class UserMapper {
         status = when (userApiModel.status) {
             ACTIVE -> Status.Active
             else -> Status.Inactive
-        }
+        },
+        createdAt = SimpleDateFormat(
+            FULL_DATE_DAY_MONTH_AND_YEAR,
+            Locale.getDefault()
+        ).format(Date())
     )
 
     fun mapFromDomainToDto(user: User) = UserApiRequest(
@@ -40,6 +46,7 @@ class UserMapper {
         private const val MALE = "male"
         private const val ACTIVE = "active"
         private const val INACTIVE = "inactive"
+        private const val FULL_DATE_DAY_MONTH_AND_YEAR = "dd/MM/yy"
     }
 }
 

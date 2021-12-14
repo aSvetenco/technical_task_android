@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sa.gorestuserstask.domain.Output
 import com.sa.gorestuserstask.domain.entity.User
 import com.sa.gorestuserstask.domain.usecase.AddUserUseCase
-import com.sa.gorestuserstask.domain.usecase.Output
 import com.sa.gorestuserstask.presentation.utils.DomainErrorMapper
 import com.sa.gorestuserstask.presentation.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
@@ -41,9 +41,7 @@ class AddUserViewModel @Inject constructor(
                 val result = addUserUseCase.invoke(user)
                 isLoadingMLD.value = false
                 when (result) {
-                    is Output.Success -> {
-
-                    }
+                    is Output.Success -> onSuccessLE.postValue(Unit)
                     is Output.Failure ->
                         onErrorLE.postValue(errorMapper.toUiErrorMessage(result.error))
                 }

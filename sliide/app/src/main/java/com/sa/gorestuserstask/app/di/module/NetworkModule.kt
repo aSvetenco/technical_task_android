@@ -1,8 +1,12 @@
-package com.sa.gorestuserstask.di.module
+package com.sa.gorestuserstask.app.di.module
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import com.sa.gorestuserstask.BuildConfig
 import com.sa.gorestuserstask.data.remote.AuthenticationInterceptor
+import com.sa.gorestuserstask.data.remote.ErrorResponse
+import com.sa.gorestuserstask.data.remote.error.ErrorResponseDeserializer
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -16,7 +20,11 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun gson(): Gson = Gson()
+    fun gson(): Gson = GsonBuilder()
+        .registerTypeAdapter(
+            object : TypeToken<List<ErrorResponse>>() {}.type,
+            ErrorResponseDeserializer())
+        .create()
 
     @Singleton
     @Provides

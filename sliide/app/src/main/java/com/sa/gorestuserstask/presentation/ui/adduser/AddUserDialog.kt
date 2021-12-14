@@ -2,19 +2,26 @@ package com.sa.gorestuserstask.presentation.ui.adduser
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.StringRes
+import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.sa.gorestuserstask.R
 import com.sa.gorestuserstask.databinding.FragmentAddUserBinding
 import com.sa.gorestuserstask.domain.entity.Gender
 import com.sa.gorestuserstask.domain.entity.Status
 import com.sa.gorestuserstask.domain.entity.User
-import com.sa.gorestuserstask.presentation.ui.adduser.di.AddUserComponent
+import com.sa.gorestuserstask.presentation.di.UserListComponent
+import com.sa.gorestuserstask.presentation.ui.users.UserListViewModel
 import com.sa.gorestuserstask.presentation.utils.ViewModelFactory
 import javax.inject.Inject
 
@@ -30,10 +37,12 @@ class AddUserDialog : DialogFragment() {
     lateinit var factory: ViewModelFactory
 
     private val addUserVM by viewModels<AddUserViewModel> { factory }
+    private val userListVM by activityViewModels<UserListViewModel> { factory }
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        AddUserComponent.buildComponent().inject(this)
+        UserListComponent.buildComponent().inject(this)
     }
 
     override fun onCreateView(
@@ -55,7 +64,8 @@ class AddUserDialog : DialogFragment() {
             invalidUserEmail.observe(viewLifecycleOwner, ::setInvalidEmailError)
             invalidUserName.observe(viewLifecycleOwner, ::setInvalidNameError)
             isLoading.observe(viewLifecycleOwner, ::isLoading)
-            onErrorLE.observe(viewLifecycleOwner, ::showError)
+            onErrorLE.observe(viewLifecycleOwner, ::onFailedAddUser)
+            onSuccessLE.observe(viewLifecycleOwner) { onSucceedUserAdded() }
         }
         setViewListeners()
     }
@@ -78,7 +88,8 @@ class AddUserDialog : DialogFragment() {
             }
             close.setOnClickListener { dismiss() }
             addUser.setOnClickListener {
-                showError(null)
+                onFailedAddUser(null)
+                it.hideKeyboard()
                 addUserVM.addUser(
                     User(
                         name = addUserName.text.toString(),
@@ -100,17 +111,37 @@ class AddUserDialog : DialogFragment() {
     }
 
     private fun isLoading(isLoading: Boolean) {
-        binding.progressCircular.isVisible = isLoading
+        binding.run {
+            progressCircular.isVisible = isLoading
+            addUser.text = ""
+        }
     }
 
-    private fun showError(error: String?) {
-        binding.error.isVisible = error != null
-        binding.error.text = error
+    private fun onFailedAddUser(errorMessage: String?) {
+        binding.run {
+            error.isVisible = errorMessage != null
+            error.text = errorMessage
+            addUser.text = getString(R.string.add_user_save)
+        }
+    }
+
+    private fun onSucceedUserAdded() {
+        binding.iconSuccess.isVisible = true
+        userListVM.fetchUsers()
+        handler.postDelayed(200L) {
+            dismiss()
+        }
     }
 
     override fun onDestroyView() {
+        handler.removeCallbacksAndMessages(null)
         super.onDestroyView()
         _binding = null
     }
 
+    private fun View.hideKeyboard() {
+        (context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)?.apply {
+            hideSoftInputFromWindow(windowToken, 0)
+        }
+    }
 }

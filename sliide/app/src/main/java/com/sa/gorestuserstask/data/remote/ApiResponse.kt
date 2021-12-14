@@ -1,18 +1,13 @@
 package com.sa.gorestuserstask.data.remote
 
-
-abstract class ApiResponse(
-    val meta: Meta? = null,
-)
-
 class UserApiResponse(
+    val meta: Meta? = null,
     val data: List<UserApiModel> = listOf()
-) : ApiResponse()
-
+)
 
 class AddUserApiResponse(
     val data: UserApiModel = UserApiModel()
-) : ApiResponse()
+)
 
 data class Meta(
     val pagination: Pagination = Pagination()
@@ -38,5 +33,10 @@ data class UserApiRequest(
     val email: String,
     val gender: String,
     val status: String
+)
+
+data class ErrorResponse(
+    val field: String? = null,
+    val message: String? = null,
 )
 

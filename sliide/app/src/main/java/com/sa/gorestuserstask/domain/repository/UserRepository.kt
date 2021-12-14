@@ -1,7 +1,7 @@
 package com.sa.gorestuserstask.domain.repository
 
 import com.sa.gorestuserstask.domain.entity.User
-import com.sa.gorestuserstask.domain.usecase.Output
+import com.sa.gorestuserstask.domain.Output
 
 interface UserRepository {
     suspend fun getPagesCount(): Output<Int>

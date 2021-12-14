@@ -21,7 +21,7 @@ class UserDataValidator {
 
     private fun validateIsEmptyEmail(email: String): Boolean {
         val isValid = email.isNotBlank() && EMAIL_ADDRESS.matcher(email).matches()
-        if (!isValid) listener?.onInvalidUserEmail(R.string.validation_error_invalid_empty_field)
+        if (!isValid) listener?.onInvalidUserEmail(R.string.validation_error_invalid_email_field)
         return isValid
     }
 
