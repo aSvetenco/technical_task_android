@@ -7,7 +7,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.annotation.StringRes
 import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
@@ -23,6 +22,7 @@ import com.sa.gorestuserstask.domain.entity.User
 import com.sa.gorestuserstask.presentation.di.UserListComponent
 import com.sa.gorestuserstask.presentation.ui.users.UserListViewModel
 import com.sa.gorestuserstask.presentation.utils.ViewModelFactory
+import com.sa.gorestuserstask.presentation.utils.hideKeyboard
 import javax.inject.Inject
 
 class AddUserDialog : DialogFragment() {
@@ -46,9 +46,9 @@ class AddUserDialog : DialogFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddUserBinding.inflate(inflater, container, false)
         return binding.root
@@ -57,8 +57,8 @@ class AddUserDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
         )
         addUserVM.apply {
             invalidUserEmail.observe(viewLifecycleOwner, ::setInvalidEmailError)
@@ -91,12 +91,12 @@ class AddUserDialog : DialogFragment() {
                 onFailedAddUser(null)
                 it.hideKeyboard()
                 addUserVM.addUser(
-                    User(
-                        name = addUserName.text.toString(),
-                        email = addUserEmail.text.toString(),
-                        gender = if (male.isChecked) Gender.Male else Gender.Female,
-                        status = if (active.isChecked) Status.Active else Status.Inactive
-                    )
+                        User(
+                                name = addUserName.text.toString(),
+                                email = addUserEmail.text.toString(),
+                                gender = if (male.isChecked) Gender.Male else Gender.Female,
+                                status = if (active.isChecked) Status.Active else Status.Inactive
+                        )
                 )
             }
         }
@@ -128,7 +128,7 @@ class AddUserDialog : DialogFragment() {
     private fun onSucceedUserAdded() {
         binding.iconSuccess.isVisible = true
         userListVM.fetchUsers()
-        handler.postDelayed(200L) {
+        handler.postDelayed(SUCCESS_DELAY) {
             dismiss()
         }
     }
@@ -139,9 +139,7 @@ class AddUserDialog : DialogFragment() {
         _binding = null
     }
 
-    private fun View.hideKeyboard() {
-        (context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)?.apply {
-            hideSoftInputFromWindow(windowToken, 0)
-        }
+    companion object {
+        private const val SUCCESS_DELAY = 200L
     }
 }

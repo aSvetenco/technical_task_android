@@ -1,9 +1,8 @@
 package com.sa.gorestuserstask.presentation.ui.adduser
 
-import android.util.Patterns.EMAIL_ADDRESS
 import androidx.annotation.StringRes
 import com.sa.gorestuserstask.R
-import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class UserDataValidator {
 
@@ -31,4 +30,16 @@ class UserDataValidator {
     }
 
     data class ValidationData(val name: String, val email: String)
+
+    private companion object {
+        val EMAIL_ADDRESS = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
+        )
+    }
 }
