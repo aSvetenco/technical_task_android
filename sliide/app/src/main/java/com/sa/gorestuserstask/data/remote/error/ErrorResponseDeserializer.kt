@@ -8,6 +8,7 @@ import com.sa.gorestuserstask.data.remote.ErrorResponse
 import timber.log.Timber
 import java.lang.reflect.Type
 
+@Suppress("NestedBlockDepth")
 class ErrorResponseDeserializer : JsonDeserializer<List<ErrorResponse>> {
 
     override fun deserialize(
@@ -17,8 +18,8 @@ class ErrorResponseDeserializer : JsonDeserializer<List<ErrorResponse>> {
     ): List<ErrorResponse> =
         try {
             val errors = mutableListOf<ErrorResponse>()
-            if (json != null) {
-                val jsonObject = json.asJsonObject
+            json?.let {
+                val jsonObject = it.asJsonObject
                 for (element in jsonObject.entrySet()) {
                     if (element.key == DATA) {
                         if (element.value.isJsonObject) {
@@ -35,9 +36,10 @@ class ErrorResponseDeserializer : JsonDeserializer<List<ErrorResponse>> {
                     }
                 }
             }
+
             errors
-        } catch (e: Exception) {
-            Timber.e(e)
+        } catch (expected: Exception) {
+            Timber.e(expected)
             listOf()
         }
 

@@ -2,18 +2,18 @@ package com.sa.gorestuserstask.data
 
 import com.sa.gorestuserstask.data.remote.error.ApiErrorMapper
 import com.sa.gorestuserstask.data.remote.error.ApiException
-import com.sa.gorestuserstask.domain.entity.Error
 import com.sa.gorestuserstask.domain.Output
+import com.sa.gorestuserstask.domain.entity.Error
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class RequestExecutor(
-    private val errorMapper: ApiErrorMapper
+        private val errorMapper: ApiErrorMapper
 ) {
     suspend fun <T, R> execute(
-        request: suspend () -> Response<T>,
-        success: (T) -> R?
+            request: suspend () -> Response<T>,
+            success: (T) -> R?
     ): Output<R> = withContext(Dispatchers.IO) {
         try {
             val response: Response<T> = request()
@@ -31,7 +31,7 @@ class RequestExecutor(
     }
 
     suspend fun execute(
-        request: suspend () -> Response<Unit>,
+            request: suspend () -> Response<Unit>,
     ): Output<Unit> = withContext(Dispatchers.IO) {
         try {
             val response: Response<Unit> = request()

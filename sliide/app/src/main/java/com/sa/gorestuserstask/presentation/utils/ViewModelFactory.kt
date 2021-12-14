@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "TooGenericExceptionThrown")
 class ViewModelFactory @Inject constructor(
     private val viewModelsMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
@@ -16,8 +16,8 @@ class ViewModelFactory @Inject constructor(
         }?.value ?: throw IllegalArgumentException("unknown model class $modelClass")
         return try {
             creator.get() as T
-        } catch (e: Exception) {
-            throw RuntimeException(e)
+        } catch (expected: Exception) {
+            throw RuntimeException(expected)
         }
     }
 }

@@ -12,7 +12,7 @@ class GetUsersFromLastPageUseCase(
     override suspend fun invoke(input: Unit): Output<List<User>> {
         return when (val result = getPageCountUseCase.invoke(Unit)) {
             is Output.Success -> repository.getUsers(result.data)
-            is Output.Failure -> Output.Failure(Error.GeneralError)
+            is Output.Failure -> Output.Failure(result.error)
         }
     }
 }
