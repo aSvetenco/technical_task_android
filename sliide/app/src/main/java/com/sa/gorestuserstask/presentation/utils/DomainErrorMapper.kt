@@ -10,9 +10,9 @@ class DomainErrorMapper(private val resources: Resources) {
         when (error) {
             is Error.ApiError -> {
                 val message = error.errors.joinToString(separator = "\n") {
-                    "${it.field} - ${it.message}"
+                    "${it.field} ${it.message}"
                 }
-                if (message.isEmpty()) genericError() else message
+                if (message.isBlank()) genericError() else message
             }
             is Error.OtherError, Error.GeneralError -> genericError()
         }

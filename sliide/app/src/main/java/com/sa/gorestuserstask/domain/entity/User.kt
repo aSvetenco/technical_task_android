@@ -9,7 +9,7 @@ data class User(
     val email: String = "",
     val gender: Gender = Gender.Male,
     val status: Status = Status.Active,
-    val createdAt: Long = 0
+    val createdAt: String = ""
 )
 
 enum class Gender(@StringRes val genderResId: Int) {

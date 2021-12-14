@@ -8,7 +8,7 @@ import com.sa.gorestuserstask.R
 import com.sa.gorestuserstask.domain.entity.User
 import com.sa.gorestuserstask.domain.usecase.DeleteUserUseCase
 import com.sa.gorestuserstask.domain.usecase.GetUsersFromLastPageUseCase
-import com.sa.gorestuserstask.domain.usecase.Output
+import com.sa.gorestuserstask.domain.Output
 import com.sa.gorestuserstask.presentation.utils.DomainErrorMapper
 import com.sa.gorestuserstask.presentation.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
@@ -29,6 +29,9 @@ class UserListViewModel @Inject constructor(
     val onErrorLE = SingleLiveEvent<String>()
     val onSuccessLE = SingleLiveEvent<Int>()
 
+    init {
+        fetchUsers()
+    }
 
     fun fetchUsers() {
         isLoadingMLD.value = true
@@ -51,7 +54,7 @@ class UserListViewModel @Inject constructor(
             when (result) {
                 is Output.Success -> {
                     onUserListLoadedMLD.postValue(result.data)
-                    onSuccessLE.postValue(R.string.user_successfully_deleted)
+                    onSuccessLE.postValue(R.string.delete_user_successfully_message)
                 }
                 is Output.Failure ->
                     onErrorLE.postValue(errorMapper.toUiErrorMessage(result.error))

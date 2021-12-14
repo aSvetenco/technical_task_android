@@ -34,7 +34,6 @@ class UserListAdapter(private val listener: Listener) :
                 userName.text = user.name
                 userEmail.text = user.email
                 userCreateDate.text = user.createdAt.toString()
-                userContent.setOnClickListener { listener.onItemClick(user) }
                 userContent.setOnLongClickListener {
                     listener.onItemLongClick(user)
                     true
@@ -53,7 +52,6 @@ class UserListAdapter(private val listener: Listener) :
     }
 
     interface Listener {
-        fun onItemClick(item: User)
         fun onItemLongClick(item: User)
     }
 }

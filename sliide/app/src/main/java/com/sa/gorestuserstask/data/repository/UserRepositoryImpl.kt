@@ -5,7 +5,7 @@ import com.sa.gorestuserstask.data.mapper.UserMapper
 import com.sa.gorestuserstask.data.remote.GorestUsersApiService
 import com.sa.gorestuserstask.domain.entity.User
 import com.sa.gorestuserstask.domain.repository.UserRepository
-import com.sa.gorestuserstask.domain.usecase.Output
+import com.sa.gorestuserstask.domain.Output
 
 class UserRepositoryImpl(
     private val service: GorestUsersApiService,

@@ -1,5 +1,6 @@
 package com.sa.gorestuserstask.domain.usecase
 
+import com.sa.gorestuserstask.domain.Output
 import com.sa.gorestuserstask.domain.entity.User
 import com.sa.gorestuserstask.domain.repository.UserRepository
 

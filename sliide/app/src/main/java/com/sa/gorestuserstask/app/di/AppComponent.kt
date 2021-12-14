@@ -1,9 +1,8 @@
-package com.sa.gorestuserstask.di
+package com.sa.gorestuserstask.app.di
 
 import android.app.Application
-import com.sa.gorestuserstask.di.module.*
-import com.sa.gorestuserstask.presentation.ui.adduser.di.AddUserDependencies
-import com.sa.gorestuserstask.presentation.ui.users.di.UserListDependencies
+import com.sa.gorestuserstask.app.di.module.*
+import com.sa.gorestuserstask.presentation.di.UserListDependencies
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -27,7 +26,6 @@ interface AppComponent {
     }
 
     fun provideUserListDependencies(): UserListDependencies
-    fun provideAddUserDependencies(): AddUserDependencies
 
     companion object {
         @Volatile

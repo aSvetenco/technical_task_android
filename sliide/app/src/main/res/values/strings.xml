@@ -1,17 +1,26 @@
 <resources>
-    <string name="app_name">GorestUsersTask</string>
+    <string name="app_name">Gorest Users</string>
 
+    <!--common-->
     <string name="user_gender_male">Male</string>
     <string name="user_gender_female">Female</string>
     <string name="user_status_active">Active</string>
     <string name="user_status_inactive">Inactive</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
+    <!--delete user-->
+    <string name="delete_user_confirmation_message">Are you sure you want to remove user - %s</string>
+    <string name="delete_user_successfully_message">User was successfully deleted</string>
+
+    <!--add user-->
+    <string name="add_user_name_hint">Name</string>
+    <string name="add_user_email_hint">Email</string>
+    <string name="add_user_save">Save User</string>
+    <string name="add_user_dialog_title">Fill user details</string>
+
+    <!--errors-->
     <string name="generic_error_message">Something went wrong&#8230;</string>
-    <string name="user_successfully_deleted">User was successfully deleted</string>
-    <string name="delete_user_message">Are you sure you want to remove user - %s</string>
-    <string name="save_user">save user</string>
-    <string name="fill_user_details">Fill user details</string>
-    <string name="user_name_hint">Name</string>
-    <string name="user_email_hint">Email</string>
     <string name="validation_error_invalid_empty_field">Should not be empty</string>
     <string name="validation_error_invalid_email_field">Wrong email format</string>
 </resources>
