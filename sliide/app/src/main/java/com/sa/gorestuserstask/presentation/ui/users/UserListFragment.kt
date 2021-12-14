@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import com.sa.gorestuserstask.R
 import com.sa.gorestuserstask.databinding.FragmentUserListBinding
 import com.sa.gorestuserstask.domain.entity.User
+import com.sa.gorestuserstask.presentation.ui.adduser.AddUserDialog
 import com.sa.gorestuserstask.presentation.ui.users.di.UserListComponent
 import com.sa.gorestuserstask.presentation.utils.ViewModelFactory
 import javax.inject.Inject
@@ -57,6 +58,9 @@ class UserListFragment : Fragment(), UserListAdapter.Listener {
         }
         binding.userList.adapter = adapter
         binding.refresh.setOnRefreshListener { userListVM.fetchUsers() }
+        binding.addUserButton.setOnClickListener {
+            AddUserDialog().show(parentFragmentManager, TAG_ADD_USER_DIALOG)
+        }
     }
 
     private fun isLoading(isLoading: Boolean) {
@@ -72,6 +76,7 @@ class UserListFragment : Fragment(), UserListAdapter.Listener {
     }
 
     override fun onItemClick(item: User) {
+
     }
 
     override fun onItemLongClick(item: User) {
@@ -89,5 +94,9 @@ class UserListFragment : Fragment(), UserListAdapter.Listener {
         super.onDestroyView()
         // binding.userList.adapter = null
         _binding = null
+    }
+
+    companion object {
+        private const val TAG_ADD_USER_DIALOG = "TAG_ADD_USER_DIALOG"
     }
 }

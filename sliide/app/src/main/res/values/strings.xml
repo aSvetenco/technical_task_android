@@ -5,7 +5,13 @@
     <string name="user_gender_female">Female</string>
     <string name="user_status_active">Active</string>
     <string name="user_status_inactive">Inactive</string>
-    <string name="generic_error_message">Something went wrong...</string>
+    <string name="generic_error_message">Something went wrong&#8230;</string>
     <string name="user_successfully_deleted">User was successfully deleted</string>
     <string name="delete_user_message">Are you sure you want to remove user - %s</string>
+    <string name="save_user">save user</string>
+    <string name="fill_user_details">Fill user details</string>
+    <string name="user_name_hint">Name</string>
+    <string name="user_email_hint">Email</string>
+    <string name="validation_error_invalid_empty_field">Should not be empty</string>
+    <string name="validation_error_invalid_email_field">Wrong email format</string>
 </resources>
