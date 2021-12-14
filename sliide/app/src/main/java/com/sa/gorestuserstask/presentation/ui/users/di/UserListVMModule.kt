@@ -12,5 +12,5 @@ interface UserListVMModule {
     @Binds
     @IntoMap
     @ViewModelKey(UserListViewModel::class)
-    abstract fun bindUserListViewModel(userListViewModel: UserListViewModel): ViewModel
+    fun bindUserListViewModel(userListViewModel: UserListViewModel): ViewModel
 }
